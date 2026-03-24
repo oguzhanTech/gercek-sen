@@ -3,7 +3,6 @@ package com.gerceksen.app.ui.result
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -51,7 +50,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gerceksen.app.data.buildShareText
 import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.ui.components.accentStyle
-import com.gerceksen.app.ui.components.quizListPlaceholderBrush
+import com.gerceksen.app.ui.components.QuizCoverBox
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -230,12 +229,13 @@ private fun RecommendationMiniCard(
             .clickable(onClick = onClick)
             .padding(12.dp),
     ) {
-        Box(
+        QuizCoverBox(
+            quiz = quiz,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
-                .clip(RoundedCornerShape(14.dp))
-                .background(brush = quizListPlaceholderBrush(quiz.id)),
+                .height(56.dp),
+            cornerRadius = 14.dp,
+            showEmojiFallback = false,
         )
         Spacer(Modifier.height(10.dp))
         Text(

@@ -1,6 +1,5 @@
 package com.gerceksen.app.ui.quizlist
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -37,8 +35,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.ui.components.GercekSenCard
+import com.gerceksen.app.ui.components.QuizCoverBox
 import com.gerceksen.app.ui.components.QuizTagChip
-import com.gerceksen.app.ui.components.quizListPlaceholderBrush
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -101,20 +99,12 @@ private fun QuizListCard(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
-                modifier = Modifier
-                    .size(72.dp)
-                    .background(
-                        brush = quizListPlaceholderBrush(quiz.id),
-                        shape = RoundedCornerShape(18.dp),
-                    ),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = "❓",
-                    style = MaterialTheme.typography.headlineMedium,
-                )
-            }
+            QuizCoverBox(
+                quiz = quiz,
+                modifier = Modifier.size(72.dp),
+                cornerRadius = 18.dp,
+                showEmojiFallback = true,
+            )
             Column(Modifier.weight(1f)) {
                 Text(
                     text = quiz.title,

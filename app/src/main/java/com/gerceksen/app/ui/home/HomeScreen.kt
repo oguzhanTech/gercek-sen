@@ -39,7 +39,7 @@ import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.ui.components.CategoryVisual
 import com.gerceksen.app.ui.components.GercekSenCard
 import com.gerceksen.app.ui.components.QuizTagChip
-import com.gerceksen.app.ui.components.quizListPlaceholderBrush
+import com.gerceksen.app.ui.components.QuizCoverBox
 import com.gerceksen.app.ui.theme.AccentViolet
 import com.gerceksen.app.ui.theme.CoralPrimary
 
@@ -209,14 +209,13 @@ private fun PopularQuizMiniCard(
             .width(220.dp)
             .clickable(onClick = onClick),
     ) {
-        Box(
+        QuizCoverBox(
+            quiz = quiz,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(96.dp)
-                .background(
-                    brush = quizListPlaceholderBrush(quiz.id),
-                    shape = RoundedCornerShape(20.dp),
-                ),
+                .height(96.dp),
+            cornerRadius = 20.dp,
+            showEmojiFallback = false,
         )
         Spacer(Modifier.height(10.dp))
         Text(

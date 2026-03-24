@@ -10,11 +10,8 @@ import com.gerceksen.app.model.QuizResultDefinition
 import com.gerceksen.app.model.QuizTag
 import com.gerceksen.app.model.ResultAccent
 
-private fun o(
-    text: String,
-    vararg pairs: Pair<String, Int>,
-    imageResId: Int? = null,
-) = AnswerOption(text, mapOf(*pairs), imageResId)
+private fun o(text: String, vararg pairs: Pair<String, Int>) =
+    AnswerOption(text, mapOf(*pairs))
 
 object SampleData {
 
@@ -170,6 +167,7 @@ object SampleData {
             questions = qs,
             resultDefinitions = results,
             resultTieBreakOrder = order,
+            coverImageResId = R.drawable.temp_monitor,
         )
     }
 
@@ -559,13 +557,14 @@ object SampleData {
         val order = listOf("it_a", "it_b", "it_c", "it_d")
         val qs = listOf(
             Question(
-                "Sohbette en çok hangisi seni tetikler?",
-                listOf(
-                    o("Yanlış bilgi geçtiğinde içim cız ediyor", "it_a" to 2, imageResId = R.drawable.quiz_option_placeholder),
-                    o("Başkasının övülmesi garip hissettiriyor", "it_b" to 2, imageResId = R.drawable.quiz_option_placeholder),
-                    o("Kalabalıkta konuşmak zor geliyor", "it_c" to 2, imageResId = R.drawable.quiz_option_placeholder),
-                    o("Konu bana gelmeyince sıkılıyorum", "it_d" to 2, imageResId = R.drawable.quiz_option_placeholder),
+                text = "Sohbette en çok hangisi seni tetikler?",
+                options = listOf(
+                    o("Yanlış bilgi geçtiğinde içim cız ediyor", "it_a" to 2),
+                    o("Başkasının övülmesi garip hissettiriyor", "it_b" to 2),
+                    o("Kalabalıkta konuşmak zor geliyor", "it_c" to 2),
+                    o("Konu bana gelmeyince sıkılıyorum", "it_d" to 2),
                 ),
+                imageResId = R.drawable.temp_monitor,
             ),
             Question(
                 "Biri hikâye anlatırken sen?",

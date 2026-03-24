@@ -5,9 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -31,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -42,7 +39,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.gerceksen.app.model.AnswerOption
 import com.gerceksen.app.ui.components.ProgressHeader
 import kotlinx.coroutines.delay
 
@@ -125,7 +121,7 @@ fun QuizPlayScreen(
                         label = "question",
                     ) { i ->
                         val q = quiz.questions.getOrNull(i) ?: return@AnimatedContent
-                        val showImageSlot = q.options.any { opt -> opt.imageResId != null }
+                        val resId = q.imageResId
                         Column(Modifier.fillMaxWidth()) {
                             Text(
                                 text = q.text,
@@ -133,7 +129,13 @@ fun QuizPlayScreen(
                                 fontWeight = FontWeight.SemiBold,
                                 textAlign = TextAlign.Start,
                             )
-                            Spacer(Modifier.height(20.dp))
+                            if (resId != null) {
+                                Spacer(Modifier.height(16.dp))
+                                QuestionIllustration(imageResId = resId, contentDescription = q.text)
+                                Spacer(Modifier.height(16.dp))
+                            } else {
+                                Spacer(Modifier.height(20.dp))
+                            }
                             q.options.forEachIndexed { optIdx, opt ->
                                 FilledTonalButton(
                                     onClick = {
@@ -143,11 +145,15 @@ fun QuizPlayScreen(
                                         .fillMaxWidth()
                                         .heightIn(min = 56.dp),
                                     shape = MaterialTheme.shapes.large,
-                                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 12.dp),
+                                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 14.dp),
                                 ) {
-                                    OptionButtonContent(
-                                        option = opt,
-                                        showImageSlot = showImageSlot,
+                                    Text(
+                                        text = opt.text,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        textAlign = TextAlign.Start,
+                                        maxLines = 3,
+                                        overflow = TextOverflow.Ellipsis,
                                     )
                                 }
                                 Spacer(Modifier.height(10.dp))
@@ -161,41 +167,18 @@ fun QuizPlayScreen(
 }
 
 @Composable
-private fun OptionButtonContent(
-    option: AnswerOption,
-    showImageSlot: Boolean,
+private fun QuestionIllustration(
+    imageResId: Int,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.Start,
-    ) {
-        if (showImageSlot) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clip(MaterialTheme.shapes.medium)
-                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)),
-            ) {
-                val resId = option.imageResId
-                if (resId != null) {
-                    Image(
-                        painter = painterResource(resId),
-                        contentDescription = option.text,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop,
-                    )
-                }
-            }
-            Spacer(Modifier.height(12.dp))
-        }
-        Text(
-            text = option.text,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Start,
-            maxLines = 3,
-            overflow = TextOverflow.Ellipsis,
-        )
-    }
+    Image(
+        painter = painterResource(imageResId),
+        contentDescription = contentDescription,
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(16f / 9f)
+            .clip(MaterialTheme.shapes.large),
+        contentScale = ContentScale.Crop,
+    )
 }

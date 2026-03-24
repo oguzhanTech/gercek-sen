@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Örnek şık görseli (vektör). Şıklarda imageResId ile kullanılır. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E8F4F2"
+        android:pathData="M12,12h96v96H12z" />
+    <path
+        android:fillColor="#3D8B8B"
+        android:pathData="M12,12h44v44H12z" />
+    <path
+        android:fillColor="#7B6BB8"
+        android:pathData="M64,12h44v44H64z" />
+    <path
+        android:fillColor="#D4A056"
+        android:pathData="M12,64h44v44H12z" />
+    <path
+        android:fillColor="#C45C3E"
+        android:pathData="M64,64h44v44H64z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,32h4v4h-4zM84,32h4v4h-4zM32,84h4v4h-4zM84,84h4v4h-4z" />
+</vector>
