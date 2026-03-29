@@ -1,14 +1,13 @@
 package com.gerceksen.app.repository
 
-import com.gerceksen.app.data.SampleData
 import com.gerceksen.app.model.Category
 import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.model.QuizTag
 
-class LocalQuizRepository : QuizRepository {
-
-    private val categories = SampleData.categories
-    private val quizzes = SampleData.quizzes
+class LocalQuizRepository(
+    private val categories: List<Category>,
+    private val quizzes: List<Quiz>,
+) : QuizRepository {
 
     override fun getCategories(): List<Category> = categories
 

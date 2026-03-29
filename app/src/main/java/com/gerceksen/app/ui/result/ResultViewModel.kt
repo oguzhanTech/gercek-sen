@@ -3,7 +3,6 @@ package com.gerceksen.app.ui.result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gerceksen.app.AppContainer
-import com.gerceksen.app.data.ResultReflectionCatalog
 import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.model.QuizResultDefinition
 import com.gerceksen.app.model.ResultReflectionContent
@@ -34,7 +33,7 @@ class ResultViewModel(
         _state.value = ResultUiState(
             quiz = quiz,
             result = def,
-            reflection = ResultReflectionCatalog.get(resultId),
+            reflection = def?.reflection,
             recommendations = repository.getRecommendations(quizId, 3),
         )
     }

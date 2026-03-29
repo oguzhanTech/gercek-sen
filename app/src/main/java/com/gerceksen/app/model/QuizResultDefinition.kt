@@ -8,4 +8,6 @@ data class QuizResultDefinition(
     /** Short line optimized for share sheet / screenshot caption. */
     val shareTeaser: String,
     val accent: ResultAccent,
+    /** Optional extended reflection (from JSON / catalog); null hides the section. */
+    val reflection: ResultReflectionContent? = null,
 )

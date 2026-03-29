@@ -229,17 +229,16 @@ private fun RecommendationMiniCard(
 ) {
     Column(
         modifier = modifier
-            .size(width = 160.dp, height = 148.dp)
+            .size(width = 160.dp, height = 156.dp)
             .clip(RoundedCornerShape(20.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
             .clickable(onClick = onClick)
             .padding(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizCoverBox(
             quiz = quiz,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp),
+            modifier = Modifier.size(72.dp),
             cornerRadius = 14.dp,
             showEmojiFallback = false,
         )

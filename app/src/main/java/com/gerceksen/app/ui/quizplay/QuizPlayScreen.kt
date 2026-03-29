@@ -177,7 +177,7 @@ private fun QuestionIllustration(
         contentDescription = contentDescription,
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(16f / 9f)
+            .aspectRatio(1f)
             .clip(MaterialTheme.shapes.large),
         contentScale = ContentScale.Crop,
     )

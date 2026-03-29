@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -208,12 +209,11 @@ private fun PopularQuizMiniCard(
         modifier = modifier
             .width(220.dp)
             .clickable(onClick = onClick),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizCoverBox(
             quiz = quiz,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(96.dp),
+            modifier = Modifier.size(112.dp),
             cornerRadius = 20.dp,
             showEmojiFallback = false,
         )
