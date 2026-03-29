@@ -3,8 +3,10 @@ package com.gerceksen.app.ui.result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gerceksen.app.AppContainer
+import com.gerceksen.app.data.ResultReflectionCatalog
 import com.gerceksen.app.model.Quiz
 import com.gerceksen.app.model.QuizResultDefinition
+import com.gerceksen.app.model.ResultReflectionContent
 import com.gerceksen.app.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 data class ResultUiState(
     val quiz: Quiz? = null,
     val result: QuizResultDefinition? = null,
+    val reflection: ResultReflectionContent? = null,
     val recommendations: List<Quiz> = emptyList(),
 )
 
@@ -31,6 +34,7 @@ class ResultViewModel(
         _state.value = ResultUiState(
             quiz = quiz,
             result = def,
+            reflection = ResultReflectionCatalog.get(resultId),
             recommendations = repository.getRecommendations(quizId, 3),
         )
     }

@@ -134,6 +134,12 @@ fun ResultScreen(
 
             Spacer(Modifier.height(20.dp))
 
+            val reflection = state.reflection
+            if (reflection != null) {
+                ReflectionSection(content = reflection)
+                Spacer(Modifier.height(20.dp))
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
